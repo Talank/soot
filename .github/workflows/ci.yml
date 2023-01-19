@@ -10,8 +10,10 @@ jobs:
   joba:
     name: test a
     runs-on: ubuntu-latest
-    run: |
-      echo "inside job a" >> file.txt
+    steps:
+      - name: test step
+        run: |
+          echo "inside job a" >> file.txt
     
   BuildAndTest:
     name: Build and Test with java ${{ matrix.java_version }}
