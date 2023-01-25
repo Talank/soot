@@ -8,8 +8,12 @@ jobs:
     steps:
       - name: test step
         run: |
-          echo "/joba" >> $GITHUB_PATH
-
+          echo "joba " >> share.txt
+      - name: Upload share file
+        uses: actions/upload-artifact@v3
+        with:
+          name: share
+          path: share.txt
     
   BuildAndTest:
     name: Build and Test with java ${{ matrix.java_version }}
@@ -20,10 +24,19 @@ jobs:
         java_version: ['8', '9', '11']
 
     steps:
+    - name: Download shared file
+      uses: actions/download-artifact@v3
+      with:
+          name: share
     - name: Build and test Java ${{ matrix.java_version }}
       run: |
-        echo "${GITHUB_PATH}/${{ matrix.java_version }}" >> $GITHUB_PATH
-        echo $GITHUB_PATH
+        echo "BuildAndTest ${{ matrix.java_version }} " >> share.txt
+        cat share.txt
+    - name: Upload share file
+      uses: actions/upload-artifact@v3
+      with:
+        name: share
+        path: share.txt
 
 name: Soot CI
 'on':
