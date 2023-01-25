@@ -5,6 +5,7 @@ jobs:
   joba:
     name: test a
     runs-on: ubuntu-latest
+    needs: [BuildAndTest]
     steps:
       - name: test step
         run: |
@@ -18,7 +19,6 @@ jobs:
   BuildAndTest:
     name: Build and Test with java ${{ matrix.java_version }}
     runs-on: ubuntu-latest
-    needs: [joba]
     strategy:
       matrix:
         java_version: ['8', '9', '11']
