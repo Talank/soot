@@ -13,8 +13,8 @@ jobs:
     steps:
       - name: test step
         run: |
-          a="this is a shared variable: joba"
-          echo "inside job a" >> file.txt
+          echo "/joba" >> $GITHUB_PATH
+
     
   BuildAndTest:
     name: Build and Test with java ${{ matrix.java_version }}
@@ -27,6 +27,5 @@ jobs:
     steps:
     - name: Build and test Java ${{ matrix.java_version }}
       run: |
-        echo "inside BuildAndTest ${{ matrix.java_version }}" >> file.txt
-        a="${a}, BuildAndTest"
-        echo $a
+        echo "${GITHUB_PATH}/${{ matrix.java_version }}" >> $GITHUB_PATH
+        echo $GITHUB_PATH
