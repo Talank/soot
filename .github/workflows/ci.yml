@@ -13,6 +13,7 @@ jobs:
     steps:
       - name: test step
         run: |
+          a="this is a shared variable: joba"
           echo "inside job a" >> file.txt
     
   BuildAndTest:
@@ -27,4 +28,5 @@ jobs:
     - name: Build and test Java ${{ matrix.java_version }}
       run: |
         echo "inside BuildAndTest ${{ matrix.java_version }}" >> file.txt
-        cat file.txt
+        a="${a}, BuildAndTest"
+        echo $a
