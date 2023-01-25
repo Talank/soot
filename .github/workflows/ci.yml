@@ -26,6 +26,6 @@ jobs:
         echo $GITHUB_PATH
 
 name: Soot CI
-on:
+'on':
   push:
   pull_request:
