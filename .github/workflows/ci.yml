@@ -1,11 +1,6 @@
 # This workflow will build a Java project with Maven
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
 
-name: Soot CI
-on:
-  push:
-  pull_request:
-
 jobs:
   joba:
     name: test a
@@ -29,3 +24,8 @@ jobs:
       run: |
         echo "${GITHUB_PATH}/${{ matrix.java_version }}" >> $GITHUB_PATH
         echo $GITHUB_PATH
+
+name: Soot CI
+on:
+  push:
+  pull_request:
