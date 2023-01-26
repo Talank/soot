@@ -2,19 +2,32 @@
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
 
 jobs:  
-  BuildAndTest:
-    name: Build and Test with java ${{ matrix.java_version }}
+  setup:
+    name: setup files
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        java_version: ['8', '9', '11']
-
     steps:
     - name: upload shared file
       uses: actions/upload-artifact@v3
       with:
           name: share
           path: share.txt
+    - name: setup file
+      run: |
+        echo "setup" >> share.txt
+
+  BuildAndTest:
+    name: Build and Test with java ${{ matrix.java_version }}
+    needs: [setup]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        java_version: ['8', '9', '11']
+
+    steps:
+    - name: download shared file
+      uses: actions/download-artifact@v3
+      with:
+          name: share
     - name: Build and test Java ${{ matrix.java_version }}
       run: |
         echo "BuildAndTest ${{ matrix.java_version }} " >> share.txt
