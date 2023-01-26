@@ -14,6 +14,11 @@ jobs:
     - name: setup file
       run: |
         echo "setup" >> share.txt
+    - name: upload shared file
+      uses: actions/upload-artifact@v3
+      with:
+          name: share
+          path: share.txt
 
   BuildAndTest:
     name: Build and Test with java ${{ matrix.java_version }}
