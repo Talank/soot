@@ -11,7 +11,7 @@ jobs:
 
     steps:
     - name: upload shared file
-      uses: actions/download-artifact@v3
+      uses: actions/upload-artifact@v3
       with:
           name: share
           path: share.txt
